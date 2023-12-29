@@ -21,3 +21,25 @@
     color: white;
     border-radius: 8px;
   }
+  .snapshots {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .snapshot {
+    text-align: center;
+  }
+  
+  .snapshot img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .snapshot p {
+    font-size: 14px;
+    color: #555;
+  }
