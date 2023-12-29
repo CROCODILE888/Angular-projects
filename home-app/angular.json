@@ -12,6 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/Angular-projects/home-app/",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -102,6 +103,9 @@
               "devServerTarget": "angular.io-example:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
