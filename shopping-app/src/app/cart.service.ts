@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from './products';
 import { HttpClient } from '@angular/common/http';
-import { Materials } from './products';
+
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -29,8 +29,8 @@ export class CartService {
   }
   apiUrl= "https://dummyjson.com/products";
 
-  getMaterials(): Observable<{ materials: Materials[]}>{
-    return this.http.get<{materials: Materials[]}>(this.apiUrl)
+  getProducts(): Observable<{ products: Product[]}>{
+    return this.http.get<{products: Product[]}>(this.apiUrl)
   }
   
 }
