@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+span{
+    color: rgb(15, 62, 15);
+    font-size: large;
+  }

@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit{
     window.alert("You will be notified");
   }
 
+  pageNumber: number =0;
   constructor(private cartService: CartService){}
   products: Product[]=[];
   displayedMaterials: Product[]=[];
@@ -31,6 +32,7 @@ export class ProductListComponent implements OnInit{
       // this.shippingCosts=this.cartService.getShippingPrices();
       this.cartService.getProducts().subscribe((response: any) => {
         this.products=response.products;
+
         this.updateDisplayedMaterials();
       })
       console.log(this.products)
@@ -43,12 +45,14 @@ export class ProductListComponent implements OnInit{
   loadMore():void{
     this.num+=3;
     this.numberToDisplay+=3;
+    this.pageNumber+=1;
     this.updateDisplayedMaterials();
   }
 
   loadBack():void{
     this.num-=3;
     this.numberToDisplay-=3
+    this.pageNumber-=1;
     this.updateDisplayedMaterials();
   }
 }
