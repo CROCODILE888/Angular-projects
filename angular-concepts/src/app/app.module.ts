@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PhoneDirective } from './phone.directive';
+import { UsersComponent } from './users/users.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PhoneDirective } from './phone.directive';
     RecipesComponent,
     RecipeDetailsComponent,
     TrialDirective,
-    PhoneDirective
+    PhoneDirective,
+    UsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

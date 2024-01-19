@@ -43,7 +43,7 @@ export class RecipeDetailsComponent implements OnInit{
       this.recipes=response.recipes;
 
       this.recipe= response.recipes.find((recipe:any) => recipe.id === recipeIdFromRoute);
-      console.log('ingredients >>>>>', 'instructions >>>>>', this.recipe?.instructions)
+      // console.log('ingredients >>>>>', 'instructions >>>>>', this.recipe?.instructions)
     })   
 }
   goBack(){

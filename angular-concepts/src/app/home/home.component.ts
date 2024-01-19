@@ -23,6 +23,9 @@ import { Component } from '@angular/core';
         <li class="nav-item">
           <a class="nav-link" routerLink="custom-directive" routerLinkActive="clicked">Custom Directive</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="users" routerLinkActive="clicked">Users</a>
+        </li>
       </ul>
     </div>
   </div>
