@@ -19,6 +19,9 @@ import { CommonModule } from '@angular/common';
 import { PhoneDirective } from './phone.directive';
 import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { CreateUserPageComponent } from './create-user-page/create-user-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     TrialDirective,
     PhoneDirective,
     UsersComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    LoginPageComponent,
+    CreateUserPageComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]

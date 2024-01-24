@@ -19,7 +19,6 @@ import { ActivatedRoute } from '@angular/router';
   styles: ``
 })
 export class UserDetailsComponent implements OnInit{
-
   users: Users[]=[];
   user: Users|undefined;
 
