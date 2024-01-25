@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +26,12 @@ import { Component } from '@angular/core';
         <li class="nav-item">
           <a class="nav-link" routerLink="users" routerLinkActive="clicked">Users</a>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="create-user" routerLinkActive="clicked">Create user</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="basic" routerLinkActive="clicked">Basic features</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -36,6 +42,9 @@ import { Component } from '@angular/core';
     background-color: #a144eb;
   }`
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
+  ngOnInit(): void {
+      console.log("Home component");
+  }
 }

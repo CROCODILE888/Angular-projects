@@ -22,6 +22,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreateUserPageComponent } from './create-user-page/create-user-page.component';
+import { BasicComponent } from './basic/basic.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CreateUserPageComponent } from './create-user-page/create-user-page.com
     UsersComponent,
     UserDetailsComponent,
     LoginPageComponent,
-    CreateUserPageComponent
+    CreateUserPageComponent,
+    BasicComponent
   ],
   imports: [
     BrowserModule,
