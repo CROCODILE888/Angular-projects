@@ -23,6 +23,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreateUserPageComponent } from './create-user-page/create-user-page.component';
 import { BasicComponent } from './basic/basic.component';
+import { StoreModule } from '@ngrx/store';
+import { nameReducer } from './profile-editor/name_formatter.reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { BasicComponent } from './basic/basic.component';
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
-    AgGridModule
+    AgGridModule,
+    StoreModule.forRoot({app: nameReducer}),
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

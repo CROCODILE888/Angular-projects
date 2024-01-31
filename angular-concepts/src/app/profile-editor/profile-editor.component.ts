@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as formActions from './name_formatter.actions';
+import { NameFormatterState } from './name_formatter.state';
 
 @Component({
   selector: 'app-profile-editor',
@@ -13,7 +16,19 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
     <input id="middle-name" type="text" formControlName="middleName" placeholder="Middle Name..."><br><br>
 
     <label for="last-name">Last Name: </label>
-    <input id="last-name" type="text" formControlName="lastName" placeholder="Last Name..."><br><br><hr><br>
+    <input id="last-name" type="text" formControlName="lastName" placeholder="Last Name..."><br><br>
+
+    <button type="button" (click)="displayFirstNameFirst()">Display First Name First</button>
+    <button type="button" (click)="displayLastNameFirst()">Display Last Name First</button>
+
+    <p *ngIf="selectedFormat === 'formattedNames'">Your full name is:
+    <h4>{{ (store | async)?.app?.firstName }} {{ (store | async)?.app?.middleName }} {{ (store | async)?.app?.lastName }}</h4>
+ 
+  <p *ngIf="selectedFormat === 'firstNameFirst'">Formatted Name (First Name First): <h4>{{ (store | async)?.app?.fullName }}</h4>
+
+  <p *ngIf="selectedFormat === 'lastNameFirst'">Formatted Name (Last Name First): <h4>{{ (store | async)?.app?.fullName }}</h4>
+      <!-- <p>Your full name is: <h4>{{ (store | async)?.app?.firstName }} {{ (store | async)?.app?.middleName }} {{ (store | async)?.app?.lastName }}</h4> -->
+    <!-- <p>Your full name is: <h4>{{lName}} {{fName}} {{mName}}</h4><br><hr><br> -->
 
     <div formGroupName="address">
     <label for="street">Street </label>
@@ -27,6 +42,9 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 
     <label for="zip">Zip </label>
     <input id="zip" type="text" formControlName="zip" maxlength="6" placeholder="Zip code..."><br><br>
+
+    
+   <p>Your address is: <h6>{{street}}<br>{{city}}, {{state}} <br>Zip code: {{zip}}</h6><br><hr><br>
 
     </div>
     <div formArrayName="aliases">
@@ -44,13 +62,14 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
  <p>Form status: {{profileForm.status}}</p>
    </form><br>
 
-   <p>Your full name is: <h4>{{lName}} {{fName}} {{mName}}</h4><br>
-   <p>Your address is: <h6>{{street}}<br>{{city}}, {{state}} <br>Zip code: {{zip}}</h6><br><hr><br>
+   
   `,
-  styles: ``
+  styles: `button{
+    margin: 2px;
+  }`
 })
 export class ProfileEditorComponent {
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder, public store: Store<{app: any}>){}
 
   profileForm = this.formBuilder.group({
     firstName: ['', Validators.required],
@@ -80,10 +99,50 @@ export class ProfileEditorComponent {
     this.lName=this.profileForm.get('lastName')?.value;
     this.mName=this.profileForm.get('middleName')?.value;
 
+    const formattedFirstName = this.profileForm.value.firstName;
+    const formattedMiddleName = this.profileForm.value.middleName;
+    const formattedLastName = this.profileForm.value.lastName;
+
     this.street=this.profileForm.get('address.street')?.value;
     this.city=this.profileForm.get('address.city')?.value;
     this.state=this.profileForm.get('address.state')?.value;
-    this.zip=Number(this.profileForm.get('address.zip')?.value);    
+    this.zip=Number(this.profileForm.get('address.zip')?.value);  
+
+    this.store.dispatch(formActions.displayFormattedNames({
+      formattedFirstName,
+      formattedLastName, 
+      formattedMiddleName
+    }));
+  }
+
+  selectedFormat: 'formattedNames' | 'firstNameFirst' | 'lastNameFirst' = 'formattedNames';
+
+  displayFirstNameFirst(): void {
+    // clear other already displayed names
+    this.store.dispatch(formActions.displayFormattedNames({
+      formattedFirstName:'',
+      formattedMiddleName: '',
+      formattedLastName: '',
+    }))
+
+    // Dispatch action for first name first format
+    const formattedName = `${this.profileForm.value.firstName} ${this.profileForm.value.middleName} ${this.profileForm.value.lastName}`;
+    this.store.dispatch(formActions.fName_first({ formattedName }));
+    this.selectedFormat = 'firstNameFirst';
+  }
+
+  displayLastNameFirst(): void {
+    // clear other already displayed names
+    this.store.dispatch(formActions.displayFormattedNames({
+      formattedFirstName:'',
+      formattedMiddleName: '',
+      formattedLastName: '',
+    }))
+
+    // Dispatch action for last name first format
+    const formattedName = `${this.profileForm.value.lastName} ${this.profileForm.value.firstName} ${this.profileForm.value.middleName}`;
+    this.store.dispatch(formActions.lName_first({ formattedName }));
+    this.selectedFormat = 'lastNameFirst';
   }
 
   get aliases(){
@@ -94,3 +153,7 @@ export class ProfileEditorComponent {
     this.aliases.push(this.formBuilder.control(''));
   }
 }
+/* Tasks: 1) implement ngrx
+2> create 3 actions for the first formcontrol i.e., the names
+3> 3 buttons to display names in 3 different styles
+*/
