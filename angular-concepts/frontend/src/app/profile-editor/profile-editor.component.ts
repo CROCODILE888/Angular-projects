@@ -9,8 +9,20 @@ import { NameFormatterState } from './name_formatter.state';
   template: `
     <h3>Basic Reactive form with (form control)</h3><br>
    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <label for="first-name">First Name: </label>
+
+   <ng-container *ngIf="!editNameTF; else editMode">
+    <label for="first-name">{{this.profileForm.get('nameLabel')?.value}}</label>
     <input id="first-name" type="text" formControlName="firstName" placeholder="First Name..."><br><br>
+   </ng-container>
+
+    <i class="fa-solid fa-pencil" (click)="editName()"></i>
+    <ng-template #editMode>
+      <!-- <input placeholder="first name"/> -->
+      <input formControlName="nameLabel" (blur)="saveLabel()" placeholder="first name"/>
+      <input id="first-name" type="text" formControlName="firstName" placeholder="First Name..."><br><br>
+      <button (click)="saveLabel()">Save</button>
+    </ng-template>
+    
 
     <label for="middle-name">Middle Name: </label>
     <input id="middle-name" type="text" formControlName="middleName" placeholder="Middle Name..."><br><br>
@@ -75,6 +87,7 @@ export class ProfileEditorComponent {
     firstName: ['', Validators.required],
     lastName: [''],
     middleName: [''],
+    nameLabel: ['First name'],
     address: this.formBuilder.group({
       street: [''],
       city: [''],
@@ -151,6 +164,17 @@ export class ProfileEditorComponent {
 
   addAlias(){
     this.aliases.push(this.formBuilder.control(''));
+  }
+
+  editNameTF: Boolean =false;
+  // nameLabel: String = "First Name: "
+  editName(){
+    this.editNameTF= true;
+  }
+
+  saveLabel(){
+    this.editNameTF = false;
+    console.log("label name saved", this.profileForm.get('nameLabel')?.value);
   }
 }
 /* Tasks: 1) implement ngrx

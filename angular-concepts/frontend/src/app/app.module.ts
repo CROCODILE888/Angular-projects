@@ -28,6 +28,7 @@ import { nameReducer } from './profile-editor/name_formatter.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({app: nameReducer}),
     BrowserAnimationsModule,
     MaterialModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
