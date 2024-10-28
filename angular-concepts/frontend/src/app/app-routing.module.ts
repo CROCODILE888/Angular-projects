@@ -33,8 +33,8 @@ const routes: Routes = [
     {path: 'create-user', component: CreateUserPageComponent},
     {path: 'basic', component: BasicComponent},
   ]},
-  {path: 'login', component: LoginPageComponent},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  // {path: 'login', component: LoginPageComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   
   
 ];

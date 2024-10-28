@@ -27,8 +27,7 @@ interface IRow {
   style="width: 100%; height: 650px;"
     [rowData]="rowData"
     [columnDefs]="colDefs"
-    [defaultColDef]="defaultColDef"
-    (gridReady)="onGridReady($event)">
+    [defaultColDef]="defaultColDef">
     
   </ag-grid-angular><br><br><hr><br>
     
@@ -43,14 +42,6 @@ interface IRow {
 export class UsersComponent implements OnInit {
   constructor(private usersService: UsersService, private http: HttpClient) { };
 
-  onGridReady(params: GridReadyEvent) {
-    
-    this.http.get<any>('http://localhost:3000/users').subscribe(
-      
-    (data) => {this.rowData = data.users;
-      console.log('Data from API:', data.users)  }
-  );
-  }
   rowData: IRow[] = [];
   colDefs: ColDef[] = [
     { field: "first_name" },
@@ -68,6 +59,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.usersService.getUsers().subscribe((response: any) => {
       this.users = response.users;
+      this.rowData = response.users;
     })
   }
 }
