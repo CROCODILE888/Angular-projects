@@ -1,1 +1,0 @@
-You are in the source folder of my project.
